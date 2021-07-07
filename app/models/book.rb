@@ -7,7 +7,9 @@ class Book < ApplicationRecord
   has_many :book_comments, dependent: :destroy
 
   # 並び替えするメソッド
-  # default_scope -> { order(title: :asc)}
+  from  = Time.current.at_beginning_of_day
+  to    = (from + 6.day).at_end_of_day
+  books = Book.where(created_at: from...to)
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
