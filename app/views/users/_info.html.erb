@@ -17,7 +17,7 @@
       </tr>
 
       <tr>
-        <!--フォロー・フォロワー欄　クリックするとエラーになる-->
+        <!--フォロー・フォロワー機能-->
         <th>follows</th>
         <th><%= link_to user.followings.count, relationship_follow_users_path(follow_id: user.id) %></th>
       </tr>
