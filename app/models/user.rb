@@ -13,6 +13,7 @@ class User < ApplicationRecord
   #DMのアソシエーション
   has_many :messages, dependent: :destroy #どんなやり取りしているか
   has_many :entries, dependent: :destroy  #どのふたりが入っているか
+  has_many :rooms, through: :messages
 
   # フォロー機能部分のアソシエーション
   has_many :relationships
