@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
    before_action :authenticate_user!
    before_action :correct_user, only: [:edit, :update]
-   impressionist :actions => [:index] #pv数表示のためのもの
+  # impressionist :actions => [:index] #pv数表示のためのもの
 
 
   def create
@@ -21,7 +21,6 @@ class BooksController < ApplicationController
    to  = Time.current.at_end_of_day
    from  = (to - 6.day).at_beginning_of_day
    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size }
-   # @books = Book.all
    @user = current_user
    @book = Book.new
   end
@@ -30,7 +29,9 @@ class BooksController < ApplicationController
     @book = Book.new
     @book_comment = BookComment.new
     @book_detail = Book.find(params[:id])
-    impressionist(@book_detail, nil, unique: [:session_hash])
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book_detail.id)
+      current_user.view_counts.create(book_id: @book_detail.id)
+    end
     @user = current_user
   end
 

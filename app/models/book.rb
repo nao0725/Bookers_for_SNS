@@ -5,6 +5,7 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user #いいねソート順にするため追加
   has_many :book_comments, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
   
 
   def favorited_by?(user)

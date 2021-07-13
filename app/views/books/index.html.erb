@@ -52,7 +52,7 @@
             </td>
           
             <td><p>コメント数：<%= book.book_comments.count %></p></td>
-            <td><%=  book.impressionist_count %></td>
+            <td class="view-count">閲覧数: <%= book.view_counts.count %></td>
           </tr>
         <% end %>
         </tbody>

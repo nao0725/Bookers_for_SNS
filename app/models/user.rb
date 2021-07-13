@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :book #いいねソート順にするため追加
   has_many :book_comments, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
   
   #DMのアソシエーション
   has_many :messages, dependent: :destroy #どんなやり取りしているか
