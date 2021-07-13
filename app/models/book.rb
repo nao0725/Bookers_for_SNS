@@ -5,8 +5,7 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user #いいねソート順にするため追加
   has_many :book_comments, dependent: :destroy
-
-
+  
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
@@ -15,5 +14,8 @@ class Book < ApplicationRecord
   # バリデーション
   validates :title, presence: true
   validates :body, presence: true, length: {maximum: 200}
+  
+  #pv数を計測
+  # is_impressionable
 end
 

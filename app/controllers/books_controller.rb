@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
    before_action :authenticate_user!
    before_action :correct_user, only: [:edit, :update]
+   impressionist :actions => [:index] #pv数表示のためのもの
 
 
   def create
@@ -29,6 +30,7 @@ class BooksController < ApplicationController
     @book = Book.new
     @book_comment = BookComment.new
     @book_detail = Book.find(params[:id])
+    impressionist(@book_detail, nil, unique: [:session_hash])
     @user = current_user
   end
 
